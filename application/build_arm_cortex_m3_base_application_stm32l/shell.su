@@ -1,0 +1,21 @@
+shell.cpp:151:7:char* str_parser_get_attr(uint8_t)	0	static
+shell.cpp:385:9:int32_t shell_epi(uint8_t*)	0	static
+shell.cpp:1004:9:int32_t shell_psv(uint8_t*)	0	static
+shell.cpp:198:9:int32_t shell_help(uint8_t*)	16	static
+stack.hpp:18:7:void ak::stack<T, len>::push(const T&) [with T = shell_dbg(uint8_t*)::test_t; long unsigned int len = 3]	16	static
+stack.hpp:28:4:T ak::stack<T, len>::top() const [with T = shell_dbg(uint8_t*)::test_t; long unsigned int len = 3]	16	static
+shell.cpp:990:9:int32_t shell_svc(uint8_t*)	8	static
+shell.cpp:973:9:int32_t shell_fwu(uint8_t*)	96	static
+shell.cpp:125:9:uint8_t str_parser(char*)	24	static
+shell.cpp:443:9:int32_t shell_flash(uint8_t*)	32	static
+shell.cpp:390:9:int32_t shell_eps(uint8_t*)	24	static
+shell.cpp:377:9:int32_t shell_stt(uint8_t*)	8	static
+shell.cpp:219:9:int32_t shell_fatal(uint8_t*)	128	static
+shell.cpp:765:9:int32_t shell_ram(uint8_t*)	24	static
+shell.cpp:212:9:int32_t shell_reboot(uint8_t*)	8	static
+shell.cpp:168:9:int32_t shell_ver(uint8_t*)	32	static
+shell.cpp:162:9:int32_t shell_reset(uint8_t*)	8	static
+stack.hpp:23:7:void ak::stack<T, len>::pop() [with T = shell_dbg(uint8_t*)::test_t; long unsigned int len = 3]	8	static
+shell.cpp:907:9:int32_t shell_boot(uint8_t*)	104	static
+shell.cpp:564:9:int32_t shell_dbg(uint8_t*)	160	dynamic
+shell.cpp:516:9:int32_t shell_lcd(uint8_t*)	8	static

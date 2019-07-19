@@ -1,0 +1,4 @@
+zb_zcl.cpp:78:10:uint8_t* zclParseHdr(zclFrameHdr_t*, uint8_t*)	8	static
+zb_zcl.cpp:268:9:uint8_t zclGetDataTypeLength(uint8_t)	0	static
+zb_zcl.cpp:252:10:uint16_t zclGetAttrDataLength(uint8_t, uint8_t*, uint16_t)	8	static
+zb_zcl.cpp:349:20:zclProcMsgStatus_t zcl_ProcessMessageMSG(af_incoming_msg_t*)	80	static

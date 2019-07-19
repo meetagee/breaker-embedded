@@ -1,0 +1,14 @@
+w5100.h:230:3:static uint16_t W5100Class::writeGAR(uint8_t*)	0	static
+w5100.h:231:3:static uint16_t W5100Class::writeSUBR(uint8_t*)	0	static
+w5100.h:233:3:static uint16_t W5100Class::writeSIPR(uint8_t*)	0	static
+Ethernet.cpp:11:5:int EthernetClass::begin(uint8_t*, long unsigned int, long unsigned int)	48	static
+Ethernet.cpp:65:6:void EthernetClass::begin(uint8_t*, IPAddress, IPAddress, IPAddress, IPAddress)	32	static
+Ethernet.cpp:59:6:void EthernetClass::begin(uint8_t*, IPAddress, IPAddress, IPAddress)	72	static
+Ethernet.cpp:50:6:void EthernetClass::begin(uint8_t*, IPAddress, IPAddress)	48	static
+Ethernet.cpp:41:6:void EthernetClass::begin(uint8_t*, IPAddress)	32	static
+Ethernet.cpp:77:5:int EthernetClass::maintain()	24	static
+Ethernet.cpp:104:11:IPAddress EthernetClass::localIP()	24	static
+Ethernet.cpp:113:11:IPAddress EthernetClass::subnetMask()	24	static
+Ethernet.cpp:122:11:IPAddress EthernetClass::gatewayIP()	24	static
+Ethernet.cpp:131:11:IPAddress EthernetClass::dnsServerIP()	0	static
+Ethernet.cpp:136:23:cpp)	16	static
