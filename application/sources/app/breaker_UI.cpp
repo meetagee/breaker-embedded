@@ -194,12 +194,18 @@ void view_scr_start_game_frames() {
 
 void view_scr_start_game_bricks() {
 	// bricks
-//	for(uint8_t i = 0; i < ROW; i++) {
-//		for(uint8_t j = 0; j < COL; j++) {
-//			view_render.drawRect(bricks[i][j].coord.x,bricks[i][j].coord.y, BRICK_WIDTH, BRICK_HEIGHT, BLACK);
-//			view_render.fillRect(bricks[i][j].coord.x,bricks[i][j].coord.y, BRICK_WIDTH, BRICK_HEIGHT, BLACK);
-//		}
-//	}
+	for(uint8_t i = 0; i < ROW; i++) {
+		for(uint8_t j = 0; j < COL; j++) {
+			if(bricks[i][j].available == true) {
+				view_render.drawRect(bricks[i][j].coord.x,bricks[i][j].coord.y, BRICK_WIDTH, BRICK_HEIGHT, BLACK);
+				view_render.fillRect(bricks[i][j].coord.x + 1, bricks[i][j].coord.y + 1, BRICK_WIDTH - 2, BRICK_HEIGHT - 2, BLACK);
+			}
+			else {
+				view_render.drawRect(bricks[i][j].coord.x + 1 ,bricks[i][j].coord.y + 1, BRICK_WIDTH - 2, BRICK_HEIGHT - 2 , WHITE);
+				view_render.fillRect(bricks[i][j].coord.x + 1, bricks[i][j].coord.y +1 , BRICK_WIDTH - 2 , BRICK_HEIGHT - 2, WHITE);
+			}
+		}
+	}
 }
 
 void view_scr_start_game_ball() {

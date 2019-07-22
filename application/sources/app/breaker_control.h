@@ -1,4 +1,4 @@
-#ifndef __BREAKER_CONTROL_H__
+﻿#ifndef __BREAKER_CONTROL_H__
 #define __BREAKER_CONTROL_H__
 
 #include <stdint.h>
@@ -10,7 +10,7 @@
 #define BRICK_WIDTH		10
 #define BRICK_HEIGHT	4
 #define BRICK_START_X	3
-#define BRICK_START_Y	2
+#define BRICK_START_Y	3
 
 // paddle params
 #define PADDLE_WIDTH	20
@@ -19,6 +19,7 @@
 // ball params
 #define BALL_WIDTH		6
 #define BALL_HEIGHT		6
+#define MAX_BALL_MOVE	6
 
 // lives
 #define LIVES	3

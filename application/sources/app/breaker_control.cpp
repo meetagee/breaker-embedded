@@ -10,7 +10,6 @@ brick_t bricks[ROW][COL];
 coord_t ball;
 coord_t paddle;
 uint8_t lives, dir, dirPaddle;
-static uint8_t tmp_lives;
 bool controlReady, displayReady, gameOver;
 
 // prototypes
@@ -22,7 +21,6 @@ void dirInit (void);
 void moveBall (void);
 void detectCollision (void);
 void movePaddle(void);
-bool checkNewRound (void);
 
 void task_game_control (ak_msg_t* msg) {
 	switch(msg->sig) {
@@ -47,17 +45,17 @@ void task_game_control (ak_msg_t* msg) {
 			timer_remove_attr(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PRE_PLAYING);
 			task_post_pure_msg(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PLAYING);
 		}
-		else { timer_set(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PRE_PLAYING, 1000, TIMER_ONE_SHOT); }
+		else {
+			timer_set(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PRE_PLAYING, 1000, TIMER_ONE_SHOT);
+		}
 	}
 		break;
 
 	case AC_GAME_CONTROL_PLAYING: {
 		APP_DBG_SIG("AC_GAME_CONTROL_PLAYING\n");
-//		APP_DBG_SIG("lives = %d, tmp_lives = %d\n", lives, tmp_lives);
-//		APP_DBG_SIG("checkNewRound() = %d\n", checkNewRound());
 		if(gameOver == false) {
-			movePaddle();
 			moveBall();
+			movePaddle();
 			task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_START_GAME);
 			detectCollision();
 		}
@@ -67,15 +65,15 @@ void task_game_control (ak_msg_t* msg) {
 	}
 		break;
 
-	case AC_GAME_CONTROL_NEW_ROUND: {
-		APP_DBG_SIG("AC_GAME_CONTROL_NEW_ROUND\n");
-		paddleInit();
-		ballInit();
-		dirInit();
+//	case AC_GAME_CONTROL_NEW_ROUND: {
+//		APP_DBG_SIG("AC_GAME_CONTROL_NEW_ROUND\n");
+//		paddleInit();
+//		ballInit();
+//		dirInit();
 
-		task_post_pure_msg(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PLAYING);
-	}
-		break;
+//		task_post_pure_msg(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PLAYING);
+//	}
+//		break;
 
 	default:
 		break;
@@ -115,7 +113,6 @@ void paddleInit (void) {
 
 void livesInit (void) {
 	lives = LIVES;
-	tmp_lives = LIVES;
 }
 
 void dirInit (void) {
@@ -125,27 +122,108 @@ void dirInit (void) {
 void moveBall(void) {
 	switch(dir) {
 	case UP_LEFT: {
-		ball.x -= 1;
-		ball.y -= 1;
+		if(ball.x - MAX_BALL_MOVE < GAME_BOX_X || ball.y - MAX_BALL_MOVE < GAME_BOX_Y) {
+			for(uint8_t i = MAX_BALL_MOVE - 1; i > 0; i--) {
+				if(ball.x - i == GAME_BOX_X || ball.y - i == GAME_BOX_Y) {
+					ball.x -= i;
+					ball.y -= i;
+					break;
+				}
+			}
+		}
+//		else if(ball.y - MAX_BALL_MOVE < bricks[4][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[3][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[2][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[1][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[0][0].coord.y	) {
+//			for(uint8_t i = MAX_BALL_MOVE - 1; i > 0; i--) {
+//					if(	ball.y - i == bricks[4][0].coord.y ||
+//						ball.y - i == bricks[3][0].coord.y ||
+//						ball.y - i == bricks[2][0].coord.y ||
+//						ball.y - i == bricks[1][0].coord.y ||
+//						ball.y - i == bricks[0][0].coord.y ) {
+//							ball.x -= i;
+//							ball.y -= i;
+//							break;
+//				}
+//			}
+//		}
+		else {
+			ball.x -= MAX_BALL_MOVE;
+			ball.y -= MAX_BALL_MOVE;
+		}
 	}
 		break;
 
 	case UP_RIGHT: {
-		ball.x += 1;
-		ball.y -= 1;
+		if(ball.x + (BALL_WIDTH - 1) + MAX_BALL_MOVE > GAME_BOX_X + GAME_BOX_WIDTH - 1 || ball.y - MAX_BALL_MOVE < GAME_BOX_Y) {
+			for(uint8_t i = MAX_BALL_MOVE - 1; i > 0; i--) {
+				if(ball.x + (BALL_WIDTH - 1) + i == GAME_BOX_X + GAME_BOX_WIDTH - 1 || ball.y - i == GAME_BOX_Y) {
+					ball.x += i;
+					ball.y -= i;
+					break;
+				}
+			}
+		}
+//		else if(ball.y - MAX_BALL_MOVE < bricks[4][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[3][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[2][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[1][0].coord.y ||
+//				ball.y - MAX_BALL_MOVE < bricks[0][0].coord.y	) {
+//			for(uint8_t i = MAX_BALL_MOVE - 1; i > 0; i--) {
+//					if(	ball.y - i == bricks[4][0].coord.y ||
+//						ball.y - i == bricks[3][0].coord.y ||
+//						ball.y - i == bricks[2][0].coord.y ||
+//						ball.y - i == bricks[1][0].coord.y ||
+//						ball.y - i == bricks[0][0].coord.y ) {
+//							ball.x += i;
+//							ball.y -= i;
+//							break;
+//				}
+//			}
+//		}
+		else {
+			ball.x += MAX_BALL_MOVE;
+			ball.y -= MAX_BALL_MOVE;
+		}
 	}
 		break;
 
 	case DOWN_LEFT: {
-		ball.x -= 1;
-		ball.y += 1;
+		if(ball.x - MAX_BALL_MOVE < GAME_BOX_X || ball.y + (BALL_HEIGHT - 1) + MAX_BALL_MOVE > paddle.y - 1) {
+			for(uint8_t i = 1; i <= MAX_BALL_MOVE - 1; i++) {
+				if(ball.x - i  == GAME_BOX_X || ball.y + (BALL_HEIGHT - 1 ) + i == paddle.y - 1) {
+					ball.x -= i;
+					ball.y += i;
+					break;
+				}
+			}
+		}
+		else {
+			ball.x -= MAX_BALL_MOVE;
+			ball.y += MAX_BALL_MOVE;
+		}
 	}
 		break;
 
 	case DOWN_RIGHT: {
-		ball.x += 1;
-		ball.y += 1;
+		if(ball.x + (BALL_WIDTH - 1) + MAX_BALL_MOVE > GAME_BOX_X + GAME_BOX_WIDTH -1 || ball.y + (BALL_HEIGHT - 1) + MAX_BALL_MOVE > paddle.y - 1) {
+			for(uint8_t i = 1; i <= MAX_BALL_MOVE - 1; i++) {
+				if(ball.x + (BALL_WIDTH - 1) + i == GAME_BOX_X + GAME_BOX_WIDTH - 1 || ball.y + (BALL_HEIGHT - 1) + i == paddle.y - 1) {
+					ball.x += i;
+					ball.y += i;
+					break;
+				}
+			}
+		}
+		else {
+			ball.x += MAX_BALL_MOVE;
+			ball.y += MAX_BALL_MOVE;
+		}
 	}
+		break;
+
+	default:
 		break;
 	}
 }
@@ -161,6 +239,17 @@ void detectCollision (void) {
 		else if (ball.x + BALL_WIDTH < GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y - 1 <= GAME_BOX_Y){ dir = DOWN_RIGHT; }
 
 		// TODO: Hit brick
+//		else if (ball.y - 1 == bricks[4][0].coord.y ||
+//				 ball.y - 1 == bricks[3][0].coord.y ||
+//				 ball.y - 1 == bricks[2][0].coord.y ||
+//				 ball.y - 1 == bricks[1][0].coord.y ||
+//				 ball.y - 1 == bricks[0][0].coord.y ) {
+//			for(uint8_t i = bricks[0][0].coord.x; i <= bricks[0][COL - 1].coord.x; i++) {
+//				if((ball.x >= i && ball.x <= i + BRICK_WIDTH - 1) || (ball.x + BALL_WIDTH - 1 >= i && ball.x + BALL_WIDTH - 1 <= i + BRICK_WIDTH - 1)) {
+//					dir = DOWN_RIGHT;
+//				}
+//			}
+//		}
 
 		else { dir = UP_RIGHT; }
 	}
@@ -189,14 +278,8 @@ void detectCollision (void) {
 		// Corner hit
 		else if(ball.x + 1 == paddle.x && ball.y + BALL_HEIGHT == paddle.y) { dir = UP_LEFT; }
 
-//		/* FOR TESTING ONLY */
-//		// Down right corner
-//		else if(ball.x + BALL_WIDTH >= GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y + BALL_HEIGHT >= GAME_BOX_Y + GAME_BOX_HEIGHT - 1) { dir = UP_LEFT; }
-//		// Lower wall
-//		else if(ball.x + BALL_WIDTH < GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y + BALL_HEIGHT >= GAME_BOX_Y + GAME_BOX_HEIGHT - 1) { dir = UP_RIGHT; }
-
 		// Loss
-		else if(ball.y + BALL_HEIGHT > paddle.y ) { gameOver = true; }
+		else if((ball.x + BALL_WIDTH - 1 < paddle.x || ball.x > paddle.x + PADDLE_WIDTH - 1) && ball.y + BALL_HEIGHT >= paddle.y ) { gameOver = true; }
 
 		// TODO: Hit brick
 
@@ -214,14 +297,8 @@ void detectCollision (void) {
 		// Corner hit
 		else if(ball.x - 1 == paddle.x + PADDLE_WIDTH - 1 && ball.y + BALL_HEIGHT == paddle.y) { dir = UP_RIGHT; }
 
-//		/* FOR TESTING ONLY */
-//		// Down left corner
-//		else if(ball.x - 1 <= GAME_BOX_X && ball.y + BALL_HEIGHT >= GAME_BOX_Y + GAME_BOX_HEIGHT - 1) { dir = UP_RIGHT; }
-//		// Lower wall
-//		else if(ball.x + BALL_WIDTH < GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y + BALL_HEIGHT >= GAME_BOX_Y + GAME_BOX_HEIGHT - 1) { dir = UP_LEFT; }
-
 		// Loss
-		else if(ball.y + BALL_HEIGHT > paddle.y ) { gameOver = true; }
+		else if((ball.x + BALL_WIDTH - 1 < paddle.x || ball.x > paddle.x + PADDLE_WIDTH - 1) && ball.y + BALL_HEIGHT >= paddle.y ) { gameOver = true; }
 
 		// TODO: Hit brick
 
@@ -269,15 +346,5 @@ void movePaddle (void) {
 
 	default:
 		break;
-	}
-}
-
-bool checkNewRound (void) {
-	if(tmp_lives != lives) {
-		tmp_lives = lives;
-		return true;
-	}
-	else {
-		return false;
 	}
 }
