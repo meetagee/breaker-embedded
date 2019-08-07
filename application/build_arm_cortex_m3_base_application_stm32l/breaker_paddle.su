@@ -1,4 +1,0 @@
-breaker_paddle.cpp:36:6:void paddleInit()	0	static
-breaker_paddle.cpp:42:6:void movePaddle()	12	static
-breaker_paddle.cpp:17:6:void task_paddle_control(ak_msg_t*)	8	static
-breaker_paddle.cpp:88:6:void ballPaddleCollision()	16	static
