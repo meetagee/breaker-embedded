@@ -14,8 +14,12 @@
 #include "app_dbg.h"
 
 #include "task_list.h"
+
 #include "breaker_UI.h"
 #include "breaker_control.h"
+#include "breaker_ball.h"
+#include "breaker_bricks.h"
+#include "breaker_paddle.h"
 
 scr_mng_t scr_mng_app;
 
@@ -110,14 +114,12 @@ void scr_startup_handle(ak_msg_t* msg) {
 	case AC_DISPLAY_SHOW_ON_LOGO: {
 		APP_DBG_SIG("AC_DISPLAY_SHOW_ON_LOGO\n");
 		view_render_display_on();
-		//timer_set(AC_TASK_DISPLAY_ID, AC_DISPLAY_SHOW_OFF, AC_DISPLAY_LOGO_INTERVAL, TIMER_ONE_SHOT);
 	}
 		break;
 
 	case AC_DISPLAY_PRE_START_GAME: {
 		APP_DBG_SIG("AC_DISPLAY_PRE_START_GAME\n");
 		SCREEN_TRAN(scr_start_game_handle, &scr_start_game);
-		displayReady = true;
 	}
 		break;
 
@@ -137,7 +139,6 @@ void scr_start_game_handle(ak_msg_t* msg) {
 	switch (msg->sig) {
 	case AC_DISPLAY_START_GAME: {
 		APP_DBG_SIG("AC_DISPLAY_START_GAME\n");
-		timer_set(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PLAYING, 10 , TIMER_ONE_SHOT);
 	}
 		break;
 
@@ -185,7 +186,7 @@ void view_scr_start_game_frames() {
 	view_render.setCursor(105, 50);
 	view_render.print(lives);
 
-	if(gameOver == true) {
+	if(checkLoss()) {
 		view_render.drawRect(4, 30, 84, 18 ,BLACK);
 		view_render.setCursor(19, 35);
 		view_render.print("GAME OVER!");

@@ -97,4 +97,5 @@ build_arm_cortex_m3_base_application_stm32l/breaker_UI.o: \
  sources/libraries/QRCode/src/qrcode.h sources/app/app.h \
  sources/app/app_dbg.h sources/app/task_list.h sources/app/breaker_UI.h \
  sources/common/screen_manager.h sources/common/view_render.h \
- sources/app/breaker_control.h
+ sources/app/breaker_control.h sources/app/breaker_ball.h \
+ sources/app/breaker_bricks.h sources/app/breaker_paddle.h

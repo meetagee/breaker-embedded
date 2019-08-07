@@ -23,8 +23,12 @@ enum {
 	AC_TASK_RF24_IF_ID,
 	AC_TASK_UART_IF_ID,
 	AC_TASK_DBG_ID,
+
 	AC_TASK_DISPLAY_ID,
 	AC_TASK_GAME_CONTROL_ID,
+    AC_TASK_BALL_ID,
+    AC_TASK_BRICKS_ID,
+    AC_TASK_PADDLE_ID,
 	AC_TASK_ZIGBEE_ID,
 
 	/* NRF24 NETWORKS */
@@ -57,8 +61,13 @@ extern void task_if(ak_msg_t*);
 extern void task_rf24_if(ak_msg_t*);
 extern void task_uart_if(ak_msg_t*);
 extern void task_dbg(ak_msg_t*);
+/******************************************************/
 extern void task_display(ak_msg_t*);
 extern void task_game_control(ak_msg_t*);
+extern void task_ball_control(ak_msg_t*);
+extern void task_bricks_control(ak_msg_t*);
+extern void task_paddle_control(ak_msg_t*);
+/******************************************************/
 extern void task_zigbee(ak_msg_t*);
 
 /* RF24 NETWORK TASK */

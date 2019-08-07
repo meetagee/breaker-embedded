@@ -12,6 +12,7 @@ application/sources/ak/src/message.c
 application/sources/ak/src/task.c
 application/sources/ak/src/timer.c
 application/sources/ak/src/tsm.c
+application/sources/app/Makefile.mk
 application/sources/app/app.cpp
 application/sources/app/app.h
 application/sources/app/app_bsp.cpp
@@ -26,8 +27,14 @@ application/sources/app/app_non_clear_ram.cpp
 application/sources/app/app_non_clear_ram.h
 application/sources/app/breaker_UI.cpp
 application/sources/app/breaker_UI.h
+application/sources/app/breaker_ball.cpp
+application/sources/app/breaker_ball.h
+application/sources/app/breaker_bricks.cpp
+application/sources/app/breaker_bricks.h
 application/sources/app/breaker_control.cpp
 application/sources/app/breaker_control.h
+application/sources/app/breaker_paddle.cpp
+application/sources/app/breaker_paddle.h
 application/sources/app/rf_remote_ctrl.cpp
 application/sources/app/shell.cpp
 application/sources/app/task_dbg.cpp

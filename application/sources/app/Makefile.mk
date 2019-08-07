@@ -17,6 +17,9 @@ SOURCES_CPP += sources/app/task_fw.cpp
 SOURCES_CPP += sources/app/task_list.cpp
 SOURCES_CPP += sources/app/breaker_UI.cpp
 SOURCES_CPP += sources/app/breaker_control.cpp
+SOURCES_CPP += sources/app/breaker_ball.cpp
+SOURCES_CPP += sources/app/breaker_bricks.cpp
+SOURCES_CPP += sources/app/breaker_paddle.cpp
 
 SOURCES_CPP += sources/app/task_zigbee.cpp
 

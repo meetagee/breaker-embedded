@@ -19,6 +19,9 @@ task_t app_task_table[] = {
 	{AC_TASK_DBG_ID			,	TASK_PRI_LEVEL_4	,	task_dbg			},
 	{AC_TASK_DISPLAY_ID		,	TASK_PRI_LEVEL_4	,	task_display		},
 	{AC_TASK_GAME_CONTROL_ID,	TASK_PRI_LEVEL_4	,	task_game_control	},
+    {AC_TASK_BALL_ID        ,	TASK_PRI_LEVEL_4	,	task_ball_control	},
+    {AC_TASK_BRICKS_ID      ,	TASK_PRI_LEVEL_4	,	task_bricks_control	},
+    {AC_TASK_PADDLE_ID      ,	TASK_PRI_LEVEL_4	,	task_paddle_control	},
 	{AC_TASK_ZIGBEE_ID		,	TASK_PRI_LEVEL_4	,	task_zigbee			},
 
 	/*************************************************************************/

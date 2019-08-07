@@ -99,6 +99,7 @@ int zb_znp::zigbee_message_handler(zigbee_msg_t& zigbee_msg) {
 		case ZCL_PROC_NOT_HANDLED_DR: {
 			APP_DBG("[zcl_ProcessMessageMSG] default response was sent and the message was not handled\n");
 		}
+			break;
 
 		default:
 			APP_DBG("zclProcMsgStatus: %d\n", zclProcMsgStatus);

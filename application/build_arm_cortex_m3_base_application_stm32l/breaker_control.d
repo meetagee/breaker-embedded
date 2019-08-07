@@ -7,6 +7,7 @@ build_arm_cortex_m3_base_application_stm32l/breaker_control.o: \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/_newlib_version.h \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_intsup.h \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_stdint.h \
+ sources/app/breaker_UI.h sources/common/screen_manager.h \
  sources/ak/inc/ak.h \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/string.h \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/_ansi.h \
@@ -32,7 +33,6 @@ build_arm_cortex_m3_base_application_stm32l/breaker_control.o: \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/c++/8.3.1/bits/std_abs.h \
  sources/ak/inc/port.h sources/platform/stm32l/platform.h \
  sources/ak/inc/task.h sources/common/container/log_queue.h \
- sources/app/breaker_UI.h sources/common/screen_manager.h \
  sources/ak/inc/message.h sources/common/view_render.h \
  sources/common/view_item.h \
  sources/driver/Adafruit_ssd1306syp/Adafruit_ssd1306syp.h \
@@ -93,10 +93,7 @@ build_arm_cortex_m3_base_application_stm32l/breaker_control.o: \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/ctype.h \
  sources/platform/stm32l/arduino/cores/stm32/pgmspace.h \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/inttypes.h \
- sources/app/task_list.h sources/ak/inc/task.h sources/app/app.h \
- sources/app/app_dbg.h sources/common/xprintf.h sources/ak/inc/timer.h \
- sources/ak/inc/timer.h \
- /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/time.h \
- /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/machine/time.h \
- /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/timespec.h \
- /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/arm-none-eabi/include/sys/_timespec.h
+ sources/app/breaker_ball.h sources/app/breaker_bricks.h \
+ sources/app/breaker_paddle.h sources/app/task_list.h \
+ sources/ak/inc/task.h sources/app/app.h sources/app/app_dbg.h \
+ sources/common/xprintf.h sources/ak/inc/timer.h sources/ak/inc/timer.h

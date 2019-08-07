@@ -4,7 +4,7 @@
 #include "xprintf.h"
 
 #if defined(APP_DBG_EN)
-#define APP_DBG(fmt, ...)       xprintf("[DBG] " fmt, ##__VA_ARGS__)
+#define APP_DBG(fmt, ...)		xprintf("[DBG] " fmt, ##__VA_ARGS__)
 #else
 #define APP_DBG(fmt, ...)
 #endif

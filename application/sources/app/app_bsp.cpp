@@ -11,6 +11,7 @@
 #include "task_list_if.h"
 
 #include "breaker_control.h"
+#include "breaker_paddle.h"
 
 button_t btn_mode;
 button_t btn_up;
@@ -32,6 +33,7 @@ void btn_mode_callback(void* b) {
 	case BUTTON_SW_STATE_RELEASED: {
 		APP_DBG("[btn_mode_callback] BUTTON_SW_STATE_RELEASED\n");
 		task_post_pure_msg(AC_TASK_DISPLAY_ID, AC_DISPLAY_PRE_START_GAME);
+		task_post_pure_msg(AC_TASK_GAME_CONTROL_ID, AC_GAME_CONTROL_PLAYING);
 	}
 		break;
 
@@ -46,6 +48,7 @@ void btn_up_callback(void* b) {
 	case BUTTON_SW_STATE_PRESSED: {
 		APP_DBG("[btn_up_callback] BUTTON_SW_STATE_PRESSED\n");
 		dirPaddle = PADDLE_LEFT;
+		task_post_pure_msg(AC_TASK_PADDLE_ID, AC_PADDLE_PLAYING);
 	}
 		break;
 
@@ -56,7 +59,7 @@ void btn_up_callback(void* b) {
 
 	case BUTTON_SW_STATE_RELEASED: {
 		APP_DBG("[btn_up_callback] BUTTON_SW_STATE_RELEASED\n");
-		dirPaddle = PADDLE_STAY;
+		//dirPaddle = PADDLE_STAY;
 	}
 		break;
 
@@ -71,6 +74,7 @@ void btn_down_callback(void* b) {
 	case BUTTON_SW_STATE_PRESSED: {
 		APP_DBG("[btn_down_callback] BUTTON_SW_STATE_PRESSED\n");
 		dirPaddle = PADDLE_RIGHT;
+		task_post_pure_msg(AC_TASK_PADDLE_ID, AC_PADDLE_PLAYING);
 	}
 		break;
 
@@ -81,7 +85,7 @@ void btn_down_callback(void* b) {
 
 	case BUTTON_SW_STATE_RELEASED: {
 		APP_DBG("[btn_down_callback] BUTTON_SW_STATE_RELEASED\n");
-		dirPaddle = PADDLE_STAY;
+		//dirPaddle = PADDLE_STAY;
 	}
 		break;
 

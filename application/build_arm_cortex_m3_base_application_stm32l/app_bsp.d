@@ -40,4 +40,4 @@ build_arm_cortex_m3_base_application_stm32l/app_bsp.o: \
  /home/lamht/workspace/tools/gcc-arm-none-eabi-8-2019-q3-update/lib/gcc/arm-none-eabi/8.3.1/include/stdarg.h \
  sources/app/app.h sources/app/app_bsp.h sources/app/app_dbg.h \
  sources/app/app_if.h sources/app/task_list.h sources/app/task_list_if.h \
- sources/app/breaker_control.h
+ sources/app/breaker_control.h sources/app/breaker_paddle.h
