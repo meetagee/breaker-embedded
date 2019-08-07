@@ -10,14 +10,9 @@
 #define GAME_BOX_Y 2
 
 #define SCORE_BOX_WIDTH 34
-#define SCORE_BOX_HEIGHT 28
+#define SCORE_BOX_HEIGHT 60
 #define SCORE_BOX_X 92
 #define SCORE_BOX_Y 2
-
-#define LIVES_BOX_WIDTH 34
-#define LIVES_BOX_HEIGHT 28
-#define LIVES_BOX_X 92
-#define LIVES_BOX_Y 34
 
 extern scr_mng_t scr_mng_app;
 

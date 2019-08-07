@@ -119,7 +119,10 @@ void scr_startup_handle(ak_msg_t* msg) {
 
 	case AC_DISPLAY_PRE_START_GAME: {
 		APP_DBG_SIG("AC_DISPLAY_PRE_START_GAME\n");
-		SCREEN_TRAN(scr_start_game_handle, &scr_start_game);
+		if(!gameStart) {
+			APP_DBG("gameStart: %d in DISPLAY\n", gameStart);
+			SCREEN_TRAN(scr_start_game_handle, &scr_start_game);
+		}
 	}
 		break;
 
@@ -138,7 +141,7 @@ void scr_startup_handle(ak_msg_t* msg) {
 void scr_start_game_handle(ak_msg_t* msg) {
 	switch (msg->sig) {
 	case AC_DISPLAY_START_GAME: {
-		APP_DBG_SIG("AC_DISPLAY_START_GAME\n");
+		//APP_DBG_SIG("AC_DISPLAY_START_GAME\n");
 	}
 		break;
 
@@ -153,43 +156,55 @@ void scr_start_game_handle(ak_msg_t* msg) {
 }
 
 void view_scr_startup() {
-	view_render.fillScreen(WHITE);
+	view_render.fillScreen(BLACK);
 	view_render.setTextSize(1);
-	view_render.drawRect(2,2,124, 60, BLACK);
-	view_render.setTextColor(BLACK);
+	view_render.drawRect(2,2,124, 60, WHITE);
+	view_render.setTextColor(WHITE);
 	view_render.setCursor(40, 10);
 	view_render.print("BREAKOUT");
 	view_render.setCursor(7, 20);
 	view_render.print("Press MODE to start");
-	view_render.drawSun(45, 40, 10, BLACK);
-	view_render.drawSun(55, 40, 10, BLACK);
-	view_render.drawSun(65, 40, 10, BLACK);
+
+	view_render.drawSun(47, 40, 10, WHITE);
+	view_render.drawSun(57, 40, 10, WHITE);
+	view_render.drawSun(67, 40, 10, WHITE);
 }
 
 void view_scr_start_game_frames() {
-	view_render.fillScreen(WHITE);
+	view_render.fillScreen(BLACK);
 
 	// game box
-	view_render.drawRect(GAME_BOX_X,GAME_BOX_Y, GAME_BOX_WIDTH, GAME_BOX_HEIGHT, BLACK);
+	view_render.drawRect(GAME_BOX_X,GAME_BOX_Y, GAME_BOX_WIDTH, GAME_BOX_HEIGHT, WHITE);
 
 	// score box
-	view_render.drawRect(SCORE_BOX_X, SCORE_BOX_Y, SCORE_BOX_WIDTH, SCORE_BOX_HEIGHT, BLACK);
+	view_render.drawRect(SCORE_BOX_X, SCORE_BOX_Y, SCORE_BOX_WIDTH, SCORE_BOX_HEIGHT, WHITE);
 	view_render.setCursor(95,4);
 	view_render.print("SCORE");
-	view_render.setCursor(100,18);
-	view_render.print(100);
-
-	// lives box
-	view_render.drawRect(LIVES_BOX_X, LIVES_BOX_Y, LIVES_BOX_WIDTH, LIVES_BOX_HEIGHT, BLACK);
+	view_render.setCursor(100,14);
+	view_render.print(score);
+	view_render.drawLine(SCORE_BOX_X, 23, SCORE_BOX_X + SCORE_BOX_WIDTH - 1, 23, WHITE);
+	view_render.setCursor(95, 20);
+	view_render.print("  _  ");
+	view_render.setCursor(95, 28);
+	view_render.print("_(.)<");
 	view_render.setCursor(95, 36);
-	view_render.print("LIVES");
-	view_render.setCursor(105, 50);
-	view_render.print(lives);
+	view_render.print("\\__) ");
+	view_render.setCursor(100, 50);
+	view_render.print("GO!");
+
+
+
 
 	if(checkLoss()) {
-		view_render.drawRect(4, 30, 84, 18 ,BLACK);
+		view_render.drawRect(4, 30, 84, 18 ,WHITE);
 		view_render.setCursor(19, 35);
 		view_render.print("GAME OVER!");
+	}
+
+	else if(checkWin()) {
+		view_render.drawRect(4, 30, 84, 18 ,WHITE);
+		view_render.setCursor(23, 35);
+		view_render.print("YOU WIN!");
 	}
 }
 
@@ -198,12 +213,12 @@ void view_scr_start_game_bricks() {
 	for(uint8_t i = 0; i < ROW; i++) {
 		for(uint8_t j = 0; j < COL; j++) {
 			if(bricks[i][j].available == true) {
-				view_render.drawRect(bricks[i][j].coord.x,bricks[i][j].coord.y, BRICK_WIDTH, BRICK_HEIGHT, BLACK);
-				view_render.fillRect(bricks[i][j].coord.x + 1, bricks[i][j].coord.y + 1, BRICK_WIDTH - 2, BRICK_HEIGHT - 2, BLACK);
+				view_render.drawRect(bricks[i][j].coord.x,bricks[i][j].coord.y, BRICK_WIDTH, BRICK_HEIGHT, WHITE);
+				view_render.fillRect(bricks[i][j].coord.x + 1, bricks[i][j].coord.y + 1, BRICK_WIDTH - 2, BRICK_HEIGHT - 2, WHITE);
 			}
 			else {
-				view_render.drawRect(bricks[i][j].coord.x + 1 ,bricks[i][j].coord.y + 1, BRICK_WIDTH - 2, BRICK_HEIGHT - 2 , WHITE);
-				view_render.fillRect(bricks[i][j].coord.x + 1, bricks[i][j].coord.y +1 , BRICK_WIDTH - 2 , BRICK_HEIGHT - 2, WHITE);
+				view_render.drawRect(bricks[i][j].coord.x + 1 ,bricks[i][j].coord.y + 1, BRICK_WIDTH - 2, BRICK_HEIGHT - 2 , BLACK);
+				view_render.fillRect(bricks[i][j].coord.x + 1, bricks[i][j].coord.y +1 , BRICK_WIDTH - 2 , BRICK_HEIGHT - 2, BLACK);
 			}
 		}
 	}
@@ -211,10 +226,10 @@ void view_scr_start_game_bricks() {
 
 void view_scr_start_game_ball() {
 	// ball
-	view_render.drawRect(ball.x, ball.y, BALL_WIDTH, BALL_HEIGHT, BLACK);
+	view_render.drawRect(ball.x, ball.y, BALL_WIDTH, BALL_HEIGHT, WHITE);
 }
 
 void view_scr_start_game_paddle() {
 	// paddle
-	view_render.drawRect(paddle.x, paddle.y, PADDLE_WIDTH, PADDLE_HEIGHT, BLACK);
+	view_render.drawRect(paddle.x, paddle.y, PADDLE_WIDTH, PADDLE_HEIGHT, WHITE);
 }

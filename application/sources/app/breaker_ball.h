@@ -4,8 +4,9 @@
 #include "breaker_control.h"
 
 // ball params
-#define BALL_WIDTH		6
-#define BALL_HEIGHT		6
+#define BALL_WIDTH			6
+#define BALL_HEIGHT			6
+#define MAX_DISPLACEMENT	2
 
 extern coord_t ball;
 

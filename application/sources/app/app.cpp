@@ -31,6 +31,7 @@
 #include "task_rf24_if.h"
 #include "task_uart_if.h"
 #include "breaker_UI.h"
+#include "breaker_control.h"
 
 /* sys include */
 #include "sys_boot.h"
@@ -174,6 +175,7 @@ void app_init_state_machine() {
  * used for app tasks
  */
 void app_task_init() {
+	gameStart = false;
 	SCREEN_CTOR(&scr_mng_app, scr_startup_handle, &scr_startup);
 	task_post_pure_msg(AC_TASK_FW_ID, FW_CHECKING_REQ);
 	task_post_pure_msg(AC_TASK_RF24_IF_ID, AC_RF24_IF_INIT_NETWORK);

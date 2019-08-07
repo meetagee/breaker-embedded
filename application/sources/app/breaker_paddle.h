@@ -10,7 +10,7 @@
 #define PADDLE_STAY			0
 #define PADDLE_LEFT			1
 #define PADDLE_RIGHT		2
-#define MAX_PADDLE_MOVE		5
+#define MAX_PADDLE_MOVE		8
 
 extern coord_t paddle;
 extern uint8_t dirPaddle;

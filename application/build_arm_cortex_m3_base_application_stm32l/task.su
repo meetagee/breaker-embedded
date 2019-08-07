@@ -9,7 +9,7 @@ task.c:193:6:task_post_dynamic_msg	24	static
 task.c:200:6:task_entry_interrupt	16	static
 task.c:218:6:task_exit_interrupt	8	static
 task.c:228:5:task_init	8	static
-task.c:253:5:task_run	16	static
+task.c:253:5:task_run	24	static
 task.c:384:11:task_self	0	static
 task.c:388:11:get_current_task_id	0	static
 task.c:392:9:get_current_task_info	0	static

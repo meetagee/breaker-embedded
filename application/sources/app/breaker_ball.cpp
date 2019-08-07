@@ -25,8 +25,8 @@ void task_ball_control(ak_msg_t* msg) {
 		break;
 
 	case(AC_BALL_PLAYING): {
-		APP_DBG_SIG("AC_BALL_PLAYING\n");
-		if(!checkLoss()) {
+		//APP_DBG_SIG("AC_BALL_PLAYING\n");
+		if(!checkLoss() && !checkWin()) {
 			moveBall();
 			ballPaddleCollision();
 			ballWallCollision();
@@ -48,26 +48,26 @@ void ballInit (void) {
 void moveBall(void) {
     switch(dir) {
     case UP_LEFT: {
-		ball.x -= 1;
-		ball.y -= 1;
+		ball.x -= MAX_DISPLACEMENT;
+		ball.y -= MAX_DISPLACEMENT;
     }
         break;
 
     case UP_RIGHT: {
-		ball.x += 1;
-		ball.y -= 1;
+		ball.x += MAX_DISPLACEMENT;
+		ball.y -= MAX_DISPLACEMENT;
     }
         break;
 
 	case DOWN_LEFT: {
-		ball.x -= 1;
-		ball.y += 1;
+		ball.x -= MAX_DISPLACEMENT;
+		ball.y += MAX_DISPLACEMENT;
     }
         break;
 
     case DOWN_RIGHT: {
-		ball.x += 1;
-		ball.y += 1;
+		ball.x += MAX_DISPLACEMENT;
+		ball.y += MAX_DISPLACEMENT;
     }
         break;
 
@@ -79,9 +79,11 @@ void moveBall(void) {
 void ballWallCollision(void) {
 	switch(dir) {
 	case(UP_LEFT): {
-		if(ball.x - 1 == GAME_BOX_X && ball.y - 1 > GAME_BOX_Y)
+		if(ball.x - MAX_DISPLACEMENT <= GAME_BOX_X && ball.y - MAX_DISPLACEMENT > GAME_BOX_Y)
 			dir = UP_RIGHT;
-		else if(ball.x - 1 == GAME_BOX_X && ball.y - 1 == GAME_BOX_Y)
+		else if(ball.x - MAX_DISPLACEMENT > GAME_BOX_X && ball.y - MAX_DISPLACEMENT <= GAME_BOX_Y )
+			dir = DOWN_LEFT;
+		else if(ball.x - MAX_DISPLACEMENT <= GAME_BOX_X && ball.y - MAX_DISPLACEMENT <= GAME_BOX_Y)
 			dir = DOWN_RIGHT;
 		else
 			dir = UP_LEFT;
@@ -89,9 +91,11 @@ void ballWallCollision(void) {
 		break;
 
 	case(UP_RIGHT): {
-		if(ball.x + BALL_WIDTH == GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y - 1 > GAME_BOX_Y)
+		if(ball.x + BALL_WIDTH - 1 + MAX_DISPLACEMENT >= GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y - MAX_DISPLACEMENT > GAME_BOX_Y)
 			dir = UP_LEFT;
-		else if(ball.x + BALL_WIDTH == GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y - 1 == GAME_BOX_Y)
+		else if(ball.x + BALL_WIDTH - 1 + MAX_DISPLACEMENT < GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y - MAX_DISPLACEMENT <= GAME_BOX_Y)
+			dir = DOWN_RIGHT;
+		else if(ball.x + BALL_WIDTH - 1 + MAX_DISPLACEMENT >= GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y - MAX_DISPLACEMENT >= GAME_BOX_Y)
 			dir = DOWN_LEFT;
 		else
 			dir = UP_RIGHT;
@@ -99,7 +103,7 @@ void ballWallCollision(void) {
 		break;
 
 	case(DOWN_LEFT): {
-		if(ball.x - 1 == GAME_BOX_X && ball.y + BALL_HEIGHT <= paddle.y)
+		if(ball.x - MAX_DISPLACEMENT <= GAME_BOX_X && ball.y + BALL_HEIGHT <= paddle.y)
 			dir = DOWN_RIGHT;
 		else
 			dir = DOWN_LEFT;
@@ -107,7 +111,7 @@ void ballWallCollision(void) {
 		break;
 
 	case(DOWN_RIGHT): {
-		if(ball.x + BALL_WIDTH == GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y + BALL_HEIGHT <= paddle.y)
+		if(ball.x + BALL_WIDTH - 1 + MAX_DISPLACEMENT >= GAME_BOX_X + GAME_BOX_WIDTH - 1 && ball.y + BALL_HEIGHT <= paddle.y)
 			dir = DOWN_LEFT;
 		else
 			dir = DOWN_RIGHT;
@@ -120,10 +124,6 @@ void ballWallCollision(void) {
 }
 
 bool checkLoss (void) {
-	if(ball.y + BALL_HEIGHT > paddle.y + PADDLE_HEIGHT - 1) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	if(ball.y + BALL_HEIGHT> paddle.y + PADDLE_HEIGHT - 1) return true;
+	else return false;
 }

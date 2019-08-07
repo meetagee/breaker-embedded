@@ -3,9 +3,6 @@
 
 #include <stdint.h>
 
-// lives
-#define LIVES	3
-
 // dirs
 #define UP_LEFT				1
 #define UP_RIGHT			2
@@ -13,10 +10,11 @@
 #define DOWN_RIGHT			4
 
 typedef struct {
-	uint8_t x;
-	uint8_t y;
+	int8_t x;
+	int8_t y;
 } coord_t;
 
-extern uint8_t lives, dir;
+extern bool gameStart;
+extern uint8_t dir;
 
 #endif // BREAKER_CONTROL_H

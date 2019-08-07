@@ -17,8 +17,10 @@ typedef struct {
 } brick_t;
 
 extern brick_t bricks[ROW][COL];
+extern uint32_t score;
 
 extern void brickInit(void);
 extern void ballBricksCollision (void);
+extern bool checkWin (void);
 
 #endif // BREAKER_BRICKS_H
